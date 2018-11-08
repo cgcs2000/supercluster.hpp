@@ -218,9 +218,8 @@ private:
 
     static point<double> project(const GeoJSONPoint &p) {
         auto lngX = p.x / 360 + 0.5;
-        const double sine = std::sin(p.y * M_PI / 180);
-        const double y = 0.5 - 0.25 * std::log((1 + sine) / (1 - sine)) / M_PI;
-        auto latY = std::min(std::max(y, 0.0), 1.0);
+        const double y = 0.25 - (p.y / 360);
+        auto latY = std::min(std::max(y, 0.0), 5.0);
         return { lngX, latY };
     }
 };
